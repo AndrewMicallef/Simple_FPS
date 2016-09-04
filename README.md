@@ -45,11 +45,22 @@ The movable parts have the following states:
                 - trans: (0, 0, 0.05)
 
     + bolt transitions:
-         1. locked & closed -> 
-              2. <- unlocked & closed ->
-                  3. <- unlocked & open ->
-                       4. <- locked & open ??
-     
+        1. locked & closed -> 
+            2. <- unlocked & closed ->
+                3. <- unlocked & open ->
+                    - ejects cartridge
+                    - next bullet is pushed up slightly
+                        4. <- locked & open ??
+                        
+            5. <- unlocked & closed ->
+                - catches next bullet, feeds into chamber as bolt closes
+                - firing now would release the hammer without garunteeing
+                    striking the bullet. Could cause cartridge to blow out
+                    the side, damaging the bolt mechanism.
+        1. <- locked & closed
+            - locks bullet in chamber, bringing striking hammer into range.
+            
+
     all transitions could be boolean values.
     Or the might be floats between 0 and 1, the value of which is multiplied by 
     the transformation. Thus pressing the key would increment the value until it
