@@ -1,23 +1,12 @@
-from bge import logic
-from bge import events
-import numpy as np
-import math
 
-import vecutils as vut
-
-scene = logic.getCurrentScene()
-text = scene.objects['Text']
-
-def Camera():
+class Camera():
     obj = scene.objects['Camera']
 
-    
-    def Init():
-        logic.mouse.position = 0.5, 0.5
-        if not 'init' in obj:
-            obj['init'] = 1
+    def __init__(self, old_owner):
+		pass
+	
 
-    def mouselook():
+    def mouselook(self, ):
         ###############
         # Looking
         ###############
@@ -25,7 +14,7 @@ def Camera():
         #The mouse input:
         # centre of screen = 0,0?
         #X = (logic.mouse.position[0] - 0.5)
-        X, Y = logic.mouse.position
+        X, Y = bge.logic.mouse.position
         Y = Y - 0.5
         
         x,y,z = obj.localOrientation.to_euler()
@@ -33,11 +22,11 @@ def Camera():
         obj.localOrientation= (x-Y, y, z)
 
         #and then the cursor is set back to the center of the screen.
-        logic.mouse.position = 0.5, 0.5
+        bge.logic.mouse.position = 0.5, 0.5
 
     
-    Init()
-    mouselook()
+    def update(self,):
+		mouselook()
 
 
 
@@ -106,15 +95,3 @@ def Player():
     Init()
     mouselook()
     Update()
-
-if __name__ == '__main__':
-    
-    bullets = 5
-    logic.mouse.position = 0.5, 0.5
-    Player()
-    
-    if logic.mouse.events[events.LEFTMOUSE] > 0:
-        text['Text'] = 'Bang!'
-    else:
-        text['Text'] = '%d bullets' %bullets
-    Camera()
