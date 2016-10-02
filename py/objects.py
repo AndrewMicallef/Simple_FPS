@@ -45,6 +45,60 @@ Cube = CustomGameObject(Cube)
 Cube.update()
 '''
 
+class brain ():
+
+    '''The simplest possible neural network of this form is composed of a
+    connection matrix and the operation:
+    
+    $output = w \times input$
+    
+    where w is the connection matrix and input the vector of nueral activity
+    
+    Example trivial network
+    -----------------------
+    
+    digraph network {
+        A -> C;
+        A -> B;
+        B -> C;
+        C -> C;
+        D -> C;
+    }
+    
+    for the network above a connection matrix of inputs and outputs can be
+    constructed as follows:
+    ```
+        A   B   C   D
+      +---------------+
+    A | 0   0   0   0 |
+      |               |
+    B | 1   0   0   0 |
+      |               |
+    C | 1   1   1   1 |
+      |               |
+    D | 0   0   0   0 |
+      +---------------+
+    ```
+    
+    In this situation each row is the input vector of the coresponding neuron
+    while each colum represents the output of it's neuron.
+    
+    TODO: How to make this controlled by genes?
+            - gene for input out put of each nuron
+            - gene for connection matrix?
+    
+    '''
+    
+    def __init__(self, sensors, actuators):
+        pass
+    
+    def generateLayer(self, _input):
+        '''create a connection matrix of all neurons'''
+        
+        synapse_weights = np.zeros((_input.size, _input.size))
+
+
+
 class creature(bge.types.KX_GameObject):
     ''' Instantiates a creature in the game world as a subclass of a blender
     game object.
