@@ -44,3 +44,89 @@ Cube = scene.objects['Cube']
 Cube = CustomGameObject(Cube)
 Cube.update()
 '''
+
+class creature(bge.types.KX_GameObject):
+    ''' Instantiates a creature in the game world as a subclass of a blender
+    game object.
+    
+    The creature has a simple neural network. In the first instance I will
+    implement a three layered structure. The first layer will be composed of
+    sensory neurons which will feed forward to a processing layer which in turn
+    is connected to output actuators.
+    
+    ----------------------------------------------------------------------
+    Sensor              genes
+    ------------------  --------------------------------------------------
+    *EXTERNAL*
+    
+    collision detector  - physical location
+                        - sensitivity
+                        - number of sensors
+                        
+    eye (rayCast)       - physical location
+                        - orientation
+                        - sensitivity
+                            - max distance
+                            - property reported
+                              :     can be one of, distance, material, object
+                              
+    *INTERNAL*
+    
+    pace maker         - frequency
+    
+    hunger             - range
+                         :  that is sets the offset between max firing and
+                            maximum hunger. 
+    
+    fatigue            - range
+                         :   offset between percieved and actual fatigue
+                             levels. When actual fatigue reaches maximum
+                             the creature is unable to move. Fatigue 
+                             replenishes if the hunger is non-zero. 
+                             Otherwise the creature will die.
+    
+    ----------------------------------------------------------------------
+    
+    Table: Sensory layers
+    
+    '''
+    def __init__(self, old_object, genome = None):
+        pass
+
+    def update(self):
+        pass
+
+    def eye(self, 
+                target_of_eye, #[x, y, z] 
+                position_of_eye, #[x, y, z]
+                max_look_distance, #float
+                **kwargs):
+                
+        '''wraps rayCast with semantics of an eye'''
+        
+        # grab ray and then unpack
+        ray = self.rayCast(
+                        objto = target_of_eye,
+                        objfrom = position_of_eye,
+                        dist = max_look_distance,
+                        poly = 2, #forces expected 5 tuple output 
+                        **kwargs,
+                        )
+                     
+        _object, hitpoint, hitnormal, polygon, hituv = ray  
+        
+        '''returning the color of the object will give error if polygon 
+        returns `None`'''
+        #rgb = polygon.material.diffuseColor
+        pass
+
+    def hunger (self):
+        pass
+    
+    def fatigue (self):
+        pass
+            
+    def heartbeat (self):
+        '''the pace maker'''
+        pass
+
