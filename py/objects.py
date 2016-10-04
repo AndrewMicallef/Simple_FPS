@@ -68,16 +68,17 @@ class brain ():
     for the network above a connection matrix of inputs and outputs can be
     constructed as follows:
     ```
-        A   B   C   D
-      +---------------+
-    A | 0   0   0   0 |
-      |               |
-    B | 1   0   0   0 |
-      |               |
-    C | 1   1   1   1 |
-      |               |
+        INPUTS
+      +---------------+  O
+    A | 0   0   0   0 |  U
+      |               |  T
+    B | 1   0   0   0 |  P
+      |               |  U
+    C | 1   1   1   1 |  T
+      |               |  S
     D | 0   0   0   0 |
       +---------------+
+       A    B   C   D
     ```
     
     In this situation each row is the input vector of the coresponding neuron
